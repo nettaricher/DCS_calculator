@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+      <head>
+            <title>get data page</title>
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+            <link rel="stylesheet" href="includes/style.css">
+            <script>
+                  function isPost() {
+                        //    POST:
+                        $.post("http://localhost/year3/nov9/service_calculator/service_calculator.php",
+                              {func:"sum",num1:10,num2:20,num3:30},
+                              function( data ) {
+                                    $(".result").append(data.retVal);
+                                    console.log( "Return data: " + data.retVal);
+                              });
+                  }
+                  function isGet() {
+                        //    GET:
+                        $.post("http://localhost/year3/nov9/service_calculator/service_calculator.php",
+                              {func:"sum",num1:10,num2:20,num3:30},
+                              function( data ) {
+                                    $(".result").append(data.retVal);
+                                    console.log( "Return data: " + data.retVal);
+                              });
+                  }
+                  function isPut() {
+                        //    PUT:
+                        var dataObj = {'func':"sum", num1:10, num2:20, num3: 30};
+                        $.ajax({
+                              url: "http://localhost/year3/nov9/service_calculator/service_calculator.php",
+                              data: dataObj,
+                              type: 'PUT',
+                              success: function(data){
+                                    $(".result").append(data.retVal);
+                                    console.log( "Return data: " + data.retVal);
+                              }
+                        });
+                  }
+            </script>
+      </head>
+      <body>
+            <section class="result">Result: </section>
+            <input class="button" type="button" value="GET" onclick="isGet()">
+            <input class="button" type="button" value="POST" onclick="isPost()">
+            <input class="button" type="button" value="PUT" onclick="isPut()">
+
+      </body>
+</html>
